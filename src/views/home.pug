@@ -2,7 +2,7 @@ extends base
 include mixins/video
 
 block content
-    each videoInfo in videos 
-        +video(videoInfo)
+    each video in videos 
+        +video(video)
     else
         h4 Nothing found

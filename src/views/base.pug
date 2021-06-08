@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
     head
-        title #{pageTitle} | Wetube
+        title #{pageTitle} | Youtube Clone
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body 
         header 
@@ -10,6 +10,10 @@ html(lang="en")
                 ul 
                     li 
                         a(href="/videos/upload") Upload Video
+                    li 
+                        a(href="/") Home
+                    li 
+                        a(href="/search") Search
         main
             block content
         include partials/footer
