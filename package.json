@@ -4,16 +4,19 @@
   "description": "Cloning Youtube using NodeJS, Express, Mongo and ES6",
   "repository": "https://github.com/jaechul1/youtube-clone",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init"
+    "dev": "nodemon --exec babel-node src/init --delay 2"
   },
   "author": "Jaechul Lee <jaechul10@naver.com>",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.4.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "pug": "^3.0.2"
   },
   "devDependencies": {
