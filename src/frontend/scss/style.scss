@@ -3,10 +3,13 @@
 @import "./config/reset";
 
 // Components
+@import "./components/header.scss";
 
 // Screens
+@import "./screens/watch.scss";
 
 // Defaults
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
 
 a {
   color: inherit;
@@ -14,5 +17,11 @@ a {
 }
 
 body {
-  background-color: $background;
+  background-color: $bg;
+  color: $white;
+  height: 200vh;
+  font-family: "Roboto", sans-serif;
+  main {
+    padding-top: 60px;
+  }
 }

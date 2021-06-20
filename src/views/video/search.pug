@@ -2,9 +2,6 @@ extends ../base
 include ../mixins/video
 
 block content
-    form(method="GET")
-        input(placeholder="Search by title", name="keyword")
-        input(value="Search", type="submit")
     div
         each video in videos
             +video(video)

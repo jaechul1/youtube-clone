@@ -1,0 +1,61 @@
+#videoContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  button {
+    background: none;
+    border: none;
+    color: $white;
+  }
+  video {
+    width: 90%;
+  }
+}
+
+#videoControls {
+  width: 90%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 10px;
+  display: grid;
+  grid-template:
+    "timeline timeline timeline timeline timeline" 30px
+    "play mute volume time full" 30px /
+    60px 60px 150px 1fr 60px;
+  place-items: center end;
+  .timelineContainer {
+    justify-self: stretch;
+    display: flex;
+    justify-content: center;
+    grid-area: timeline;
+    input {
+      width: 98%;
+    }
+  }
+  #play {
+    grid-area: play;
+    font-size: 18px;
+  }
+  #mute {
+    grid-area: mute;
+    font-size: 24px;
+  }
+  #volume {
+    grid-area: volume;
+    justify-self: center;
+  }
+  .timeContainer {
+    grid-area: time;
+    justify-self: start;
+  }
+  #fullscreen {
+    grid-area: full;
+    font-size: 24px;
+    justify-self: start;
+  }
+  opacity: 0;
+  &.showing {
+    opacity: 1;
+  }
+  transition: opacity 0.2s ease-in-out;
+}

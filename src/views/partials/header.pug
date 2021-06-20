@@ -1,22 +1,37 @@
 header 
     nav 
-        ul 
+        ul.headerNav 
+            li
+                a
+                    i.fas.fa-chevron-circle-down.icon
             li 
-                a(href="/")
+                a(href="/").iconContainer
                     i.fab.fa-youtube
+                    span.youtubeText YouTube
+            li
+                form(method="GET", action="/search", autocomplete="off").searchContainer 
+                    input(placeholder="Search", name="keyword").searchInput
+                    button(type="submit").searchBtn
+                        i.fas.fa-search.icon
             if loggedIn
-                li 
-                    a(href=`/users/${loggedInUser._id}`) My Profile
-                li 
-                    a(href="/users/edit") Edit Profile
-                li 
-                    a(href="/users/logout") Log out
-                li 
-                    a(href="/videos/upload") Upload Video
+                div.profileContainer
+                    li 
+                        a(href="/users/logout").iconContainer
+                            i.fas.fa-user-alt-slash.icon
+                    li 
+                        a(href="/videos/upload").iconContainer
+                            i.fas.fa-video.icon
+                    li 
+                        a(href=`/users/${loggedInUser._id}`).iconContainer 
+                            i.fas.fa-cloud.icon
+                    li 
+                        a(href="/users/edit").iconContainer
+                            i.fas.fa-user-edit.icon
             else
-                li 
-                    a(href="/join") Join
-                li 
-                    a(href="/login") Login
-            li 
-                a(href="/search") Search
+                div.profileContainer
+                    li 
+                        a(href="/login").iconContainer
+                            i.fas.fa-user-alt.icon
+                    li 
+                        a(href="/join").iconContainer
+                            i.fas.fa-pencil-alt.icon

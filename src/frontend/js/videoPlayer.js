@@ -1,7 +1,10 @@
 const video = document.querySelector("video"),
   playBtn = document.getElementById("play"),
+  playBtnIcon = playBtn.querySelector("i"),
   muteBtn = document.getElementById("mute"),
+  muteBtnIcon = muteBtn.querySelector("i"),
   fullscreenBtn = document.getElementById("fullscreen"),
+  fullscreenBtnIcon = fullscreenBtn.querySelector("i"),
   volumeRange = document.getElementById("volume"),
   currentTime = document.getElementById("currentTime"),
   totalTime = document.getElementById("totalTime"),
@@ -20,33 +23,41 @@ const formatTime = (seconds) => {
 
 playBtn.addEventListener("click", () => {
   video.paused
-    ? (video.play(), (playBtn.innerText = "Pause"))
-    : (video.pause(), (playBtn.innerText = "Play"));
+    ? (video.play(), (playBtnIcon.classList = "fas fa-pause"))
+    : (video.pause(), (playBtnIcon.classList = "fas fa-play"));
 });
 
 muteBtn.addEventListener("click", () => {
   video.muted
     ? ((video.muted = false),
-      (muteBtn.innerText = "Mute"),
+      (muteBtnIcon.classList = "fas fa-volume-up"),
       (volumeRange.value = volumeValue))
     : ((video.muted = true),
-      (muteBtn.innerText = "Unmute"),
+      (muteBtnIcon.classList = "fas fa-volume-mute"),
       (volumeRange.value = 0));
 });
 
 fullscreenBtn.addEventListener("click", () => {
   document.fullscreenElement
     ? (document.exitFullscreen(),
-      (fullscreenBtn.innerText = "Enter Fullscreen"))
+      (fullscreenBtnIcon.classList = "fas fa-expand"))
     : (videoContainer.requestFullscreen(),
-      (fullscreenBtn.innerText = "Exit Fullscreen"));
+      (fullscreenBtnIcon.classList = "fas fa-compress"));
 });
 
 volumeRange.addEventListener("input", (event) => {
   const value = event.target.value;
   if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "Mute";
+    muteBtnIcon.classList = "fas fa-volume-up";
+  }
+  if (value >= 0.5) {
+    muteBtnIcon.classList = "fas fa-volume-up";
+  } else if (value == event.target.min) {
+    video.muted = true;
+    muteBtnIcon.classList = "fas fa-volume-mute";
+  } else {
+    muteBtnIcon.classList = "fas fa-volume-down";
   }
   volumeValue = value;
   video.volume = value;
@@ -66,6 +77,12 @@ video.addEventListener("timeupdate", () => {
   const current = Math.floor(video.currentTime);
   currentTime.innerText = formatTime(current);
   timeline.value = current;
+});
+
+video.addEventListener("ended", () => {
+  fetch(`/api/videos/${video.dataset.id}/view`, {
+    method: "POST",
+  });
 });
 
 videoContainer.addEventListener("mousemove", () => {
