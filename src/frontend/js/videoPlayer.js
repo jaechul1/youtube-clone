@@ -18,6 +18,7 @@ let controlsTimeout = null;
 let volumeStore = 0.5;
 const inputEventStore = new Event("input");
 video.volume = volumeStore;
+video.src = video.dataset.src;
 
 const togglePlay = () => {
   video.paused

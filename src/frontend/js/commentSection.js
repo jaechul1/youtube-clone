@@ -2,7 +2,7 @@ const videoElement = document.querySelector("video");
 const form = document.getElementById("commentForm");
 const eraseBtns = [...document.getElementsByClassName("eraseBtn")];
 
-const addComment = (text, id, name, url, social) => {
+const addComment = (text, id, name, url) => {
   const videoComments = document.querySelector(".video__comments ul");
   const newComment = document.createElement("li");
   newComment.dataset.id = id;
@@ -10,11 +10,7 @@ const addComment = (text, id, name, url, social) => {
 
   let avatar = document.createElement("div");
   avatar.className = "avatarImg";
-  if (social) {
-    avatar.style.backgroundImage = `url(${url})`;
-  } else {
-    avatar.style.backgroundImage = `url(/${url})`;
-  }
+  avatar.style.backgroundImage = `url(${url})`;
 
   const span = document.createElement("span");
   span.innerText = name;
@@ -58,9 +54,8 @@ const handleSubmit = async (event) => {
   switch (response.status) {
     case 201:
       commentArea.value = "";
-      const { newCommentId, name, avatarUrl, socialOnly } =
-        await response.json();
-      addComment(text, newCommentId, name, avatarUrl, socialOnly);
+      const { newCommentId, name, avatarUrl } = await response.json();
+      addComment(text, newCommentId, name, avatarUrl);
       break;
     default:
   }

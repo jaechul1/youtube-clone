@@ -169,10 +169,10 @@ export const createComment = async (req, res) => {
     video: id,
   });
   const newCommentId = comment._id;
-  const { name, avatarUrl, socialOnly } = await User.findById(user._id);
+  const { name, avatarUrl } = await User.findById(user._id);
   video.comments.push(newCommentId);
   video.save();
-  return res.status(201).json({ newCommentId, name, avatarUrl, socialOnly });
+  return res.status(201).json({ newCommentId, name, avatarUrl });
 };
 
 export const deleteComment = async (req, res) => {
