@@ -3,7 +3,7 @@ include ./avatar
 mixin video(video)
     div#videoBait 
         a(href=`/videos/${video.id}`)
-            div.thumbImg(style=`background-image: url(/${video.thumbUrl})`)
+            div.thumbImg(style=`background-image: url(${video.thumbUrl})`)
             div.metaInfo
                 +avatar(video.owner)
                 div.videoMeta
