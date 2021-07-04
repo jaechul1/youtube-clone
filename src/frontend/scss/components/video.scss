@@ -1,0 +1,26 @@
+#videoBait {
+  justify-self: center;
+  .thumbImg {
+    width: 360px;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+  }
+  .metaInfo {
+    display: flex;
+    padding: 15px 5px 0px 5px;
+  }
+  .avatarImg {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+    margin-right: 10px;
+  }
+  .videoMeta {
+    p + p {
+      margin-top: 5px;
+    }
+  }
+}

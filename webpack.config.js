@@ -1,10 +1,14 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
+const BASE_JS_PATH = "./src/frontend/js/";
+
 module.exports = {
   entry: {
-    main: "./src/frontend/js/main.js",
-    videoPlayer: "./src/frontend/js/videoPlayer.js",
+    main: `${BASE_JS_PATH}main.js`,
+    videoPlayer: `${BASE_JS_PATH}videoPlayer.js`,
+    recorder: `${BASE_JS_PATH}recorder.js`,
+    commentSection: `${BASE_JS_PATH}commentSection.js`,
   },
   mode: "development",
   watch: true,

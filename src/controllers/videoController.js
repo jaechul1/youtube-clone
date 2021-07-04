@@ -1,14 +1,24 @@
 import Video from "../models/Video";
 import User from "../models/User";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdAt: "desc" });
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
   return res.render("home", { pageTitle: "Home", videos });
 };
 
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id)
+    .populate("owner")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "owner",
+      },
+    });
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
@@ -27,6 +37,7 @@ export const getEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
   return res.render("video/edit", {
@@ -48,6 +59,7 @@ export const postEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
@@ -65,7 +77,7 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const {
     body: { title, description, hashtags },
-    file: { path },
+    files: { video, thumb },
     session: {
       user: { _id },
     },
@@ -74,7 +86,8 @@ export const postUpload = async (req, res) => {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl: path,
+      fileUrl: video[0].path,
+      thumbUrl: thumb[0].path,
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });
@@ -83,10 +96,8 @@ export const postUpload = async (req, res) => {
     user.save();
     return res.redirect("/");
   } catch (error) {
-    return res.status(400).render("video/upload", {
-      pageTitle: "Upload Video",
-      errorMessage: error._message,
-    });
+    req.flash("error", error._message);
+    return res.status(400).redirect("/videos/upload");
   }
 };
 
@@ -102,6 +113,7 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found" });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
@@ -123,7 +135,7 @@ export const search = async (req, res) => {
       title: {
         $regex: new RegExp(keyword, "i"),
       },
-    });
+    }).populate("owner");
   }
   return res.render("video/search", { pageTitle: "Search", videos });
 };
@@ -136,4 +148,46 @@ export const recordView = async (req, res) => {
   video.meta.views = video.meta.views + 1;
   await video.save();
   return res.sendStatus(200);
+};
+
+export const createComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  const newCommentId = comment._id;
+  const { name, avatarUrl, socialOnly } = await User.findById(user._id);
+  video.comments.push(newCommentId);
+  video.save();
+  return res.status(201).json({ newCommentId, name, avatarUrl, socialOnly });
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { id, cid },
+    session: { user },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.findById(cid);
+  if (String(user._id) === String(comment.owner)) {
+    await Comment.findByIdAndDelete(cid);
+    video.comments = video.comments.filter((commentId) => commentId !== cid);
+    video.save();
+    return res.sendStatus(200);
+  } else {
+    return res.sendStatus(403);
+  }
 };

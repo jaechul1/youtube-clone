@@ -1,8 +1,10 @@
 extends ../base
+include ../mixins/avatar
 
 block content
     div#videoContainer
-        video(src=`/${video.fileUrl}`, data-id=video._id)
+        video(src=`/${video.fileUrl}`, data-id=video._id, width="1024", height="576")
+        div#blackBackground
         div#videoControls
             div.timelineContainer 
                 input(type="range", step="1", value="0", min="0")#timeline
@@ -10,7 +12,7 @@ block content
                 i.fas.fa-play
             button#mute
                 i.fas.fa-volume-up
-            input(type="range", step="0.01", value="0.5", min="0", max="1")#volume
+            input(type="range", step="0.05", value="0.5", min="0", max="1")#volume
             div.timeContainer 
                 span#currentTime 0:00
                 span  / 
@@ -18,16 +20,36 @@ block content
             button#fullscreen 
                 i.fas.fa-expand
 
-    //- div
-    //-     p=video.description
-    //-     small=video.createdAt
-    //- div
-    //-     small Uploaded by 
-    //-         a(href=`/users/${video.owner._id}`)=video.owner.name
-    //- if loggedInUser && String(video.owner._id) === String(loggedInUser._id)
-    //-     a(href=`${video.id}/edit`) Edit Video 
-    //-     br
-    //-     a(href=`${video.id}/delete`) Delete Video
+    div.watch__meta
+        span=`${video.meta.views} views • ${video.createdAt.getFullYear()}.${video.createdAt.getMonth() + 1}.${video.createdAt.getDate()}`
+    div.watch__uploader
+        a(href=`/users/${video.owner._id}`)
+            +avatar(video.owner)
+            span=video.owner.name
+    if loggedInUser && String(video.owner._id) === String(loggedInUser._id)
+        div.watch__authorize
+            a(href=`${video.id}/edit`) Edit Video 
+            a(href=`${video.id}/delete`) Delete Video
+    
+
+    if loggedIn
+        div.video__add-comments#addComments
+            form.video__comment-form#commentForm
+                +avatar(loggedInUser)
+                input(placeholder="Write a comment")
+                button
+                    i.fas.fa-share
+    div.video__comments#comments
+        ul 
+            each comment in video.comments.reverse()
+                li(data-id=comment.id).comment
+                    +avatar(comment.owner)
+                    span=comment.owner.name
+                    span=comment.text
+                    if loggedInUser && String(comment.owner._id) === String(loggedInUser._id)
+                        button.eraseBtn
+                            i.fas.fa-eraser
 
 block scripts 
     script(src="/assets/js/videoPlayer.js")
+    script(src="/assets/js/commentSection.js")

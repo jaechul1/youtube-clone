@@ -1,3 +1,5 @@
+include ../mixins/avatar
+
 header 
     nav 
         ul.headerNav 
@@ -22,11 +24,11 @@ header
                         a(href="/videos/upload").iconContainer
                             i.fas.fa-video.icon
                     li 
-                        a(href=`/users/${loggedInUser._id}`).iconContainer 
-                            i.fas.fa-cloud.icon
-                    li 
                         a(href="/users/edit").iconContainer
                             i.fas.fa-user-edit.icon
+                    li 
+                        a(href=`/users/${loggedInUser._id}`)
+                            +avatar(loggedInUser)
             else
                 div.profileContainer
                     li 

@@ -1,17 +1,21 @@
 extends ../base
 
 block content
-    if errorMessage
-        span=errorMessage
     form(method="POST")
-        input(name="name", placeholder="Name", required)
-        input(name="email", placeholder="Email", type="email", required)
-        input(name="username", placeholder="Username", required)
-        input(name="password", placeholder="Password", type="password", required)
-        input(name="password2", placeholder="Confirm Password", type="password", required)
-        input(name="location" placeholder="Location")
+        label(for="join-name") Name
+        input(name="name", placeholder="Name", id="join-name", required)
+        label(for="join-email") Email
+        input(name="email", placeholder="Email", id="join-email", type="email", required)
+        label(for="join-username") Username
+        input(name="username", placeholder="Username", id="join-username", required)
+        label(for="join-password") Password
+        input(name="password", placeholder="Password", id="join-password", type="password", required)
+        label(for="join-password2") Confirm Password
+        input(name="password2", placeholder="Confirm Password", id="join-password2", type="password", required)
+        label(for="join-location") Location
+        input(name="location" placeholder="Location", id="join-location")
         input(type="submit", value="Join")
-    hr
-    div
-        span Already have an account? 
-        a(href="/login") Login
+        hr
+        div.form__additional
+            span Already have an account? 
+            a(href="/login") Login

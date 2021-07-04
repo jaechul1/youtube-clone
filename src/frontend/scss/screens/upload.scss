@@ -1,0 +1,37 @@
+.upload__smalltext {
+  opacity: 0.8;
+  font-size: 13px;
+}
+
+.upload__videoDiv {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.upload__buttonDiv {
+  display: flex;
+  justify-content: center;
+  button {
+    padding: 2px 10px;
+    border-radius: 3px;
+    border: none;
+    &:last-child {
+      margin-left: 5px;
+    }
+  }
+  margin: 20px 0 50px 0;
+}
+
+#videoMessageBox {
+  width: 1024px;
+  height: 576px;
+  background-color: $white;
+  border-radius: 5px;
+  color: $bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 18px;
+  }
+}

@@ -1,10 +1,57 @@
+include ./avatar
+
 mixin video(video)
-    div 
-        h4
-            a(href=`/videos/${video.id}`)=video.title
-        p=video.description
-        ul 
-            each hashtag in video.hashtags
-                li=hashtag
-        small=video.createdAt
-        hr
+    div#videoBait 
+        a(href=`/videos/${video.id}`)
+            div.thumbImg(style=`background-image: url(/${video.thumbUrl})`)
+            div.metaInfo
+                +avatar(video.owner)
+                div.videoMeta
+                    p=video.title
+                    if video.owner.name
+                        p=video.owner.name
+                    - function formatTime(ms) {
+                    -   const year = Math.floor(ms/31536000000);
+                    -   const month = Math.floor(ms/2592000000);
+                    -   const day = Math.floor(ms/86400000);
+                    -   const hour = Math.floor(ms/3600000);
+                    -   const minute = Math.floor(ms/60000);
+                    -   const second = Math.floor(ms/1000);
+                    -   if (year > 1) {
+                    -       return `${year} years`
+                    -   }
+                    -   if (year == 1) {
+                    -       return `${year} year`
+                    -   }
+                    -   if (month > 1) {
+                    -       return `${month} months`
+                    -   }
+                    -   if (month == 1) {
+                    -       return `${month} month`
+                    -   }
+                    -   if (day > 1) {
+                    -       return `${day} days`
+                    -   }
+                    -   if (day == 1) {
+                    -       return `${day} day`
+                    -   }
+                    -   if (hour > 1) {
+                    -       return `${hour} hours`
+                    -   }
+                    -   if (hour == 1) {
+                    -       return `${hour} hour`
+                    -   }
+                    -   if (minute > 1) {
+                    -       return `${minute} minutes`
+                    -   }
+                    -   if (minute == 1) {
+                    -       return `${minute} minute`
+                    -   }
+                    -   if (second > 1) {
+                    -       return `${second} seconds`
+                    -   }
+                    -   if (second == 1) {
+                    -       return `${second} second`
+                    -   }
+                    -}
+                    p=`${video.meta.views} views • ${formatTime(Date.now() - video.createdAt.getTime())} ago`

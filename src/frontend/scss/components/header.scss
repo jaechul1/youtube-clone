@@ -1,4 +1,5 @@
 .headerNav {
+  z-index: 1;
   position: fixed;
   width: calc(100% - 40px);
   background-color: rgba(32, 32, 32, 0.95);
@@ -15,13 +16,15 @@
     font-size: 32px;
   }
   .youtubeText {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 21px;
     transform: scaleX(0.7) translateX(-12px);
+    color: white;
   }
   .profileContainer {
     justify-self: end;
     display: flex;
+    align-items: center;
     li + li {
       margin-left: 20px;
     }
@@ -40,20 +43,23 @@
     color: $white;
   }
   .searchInput {
-    width: 50%;
+    width: 400px;
     background-color: #121212;
     color: $white;
-    padding: 3px 10px;
-    border: none;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     margin-right: 5px;
     &:focus {
       outline: $white solid 1px;
     }
+    font-size: 16px;
   }
-}
-
-.avatarImg {
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  .avatarImg {
+    margin-left: 3px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+  }
 }

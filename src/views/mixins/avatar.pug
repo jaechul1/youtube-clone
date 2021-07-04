@@ -1,0 +1,6 @@
+mixin avatar(target)
+    if target.avatarUrl
+        if target.socialOnly
+            div.avatarImg(style=`background-image: url(${target.avatarUrl})`)
+        else 
+            div.avatarImg(style=`background-image: url(/${target.avatarUrl})`)

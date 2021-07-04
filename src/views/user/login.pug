@@ -1,15 +1,19 @@
 extends ../base
 
 block content
-    if errorMessage
-        span=errorMessage
-    form(method="POST")
+    form(method="POST").login__form
         input(name="username", placeholder="Username", required)
         input(name="password", placeholder="Password", type="password", required)
-        input(type="submit", value="Login")
+        input(type="submit", value="Login").login__btn
         br
-        a(href="/users/github/start") Continue with Github
-    hr
-    div
-        span Don't have an account? 
-        a(href="/join") Join
+        a(href="/users/github/start").social__login.social__github 
+            i.fab.fa-github
+            span Continue with Github
+        br
+        a(href="/users/kakao/start").social__login.social__kakao 
+            i.fas.fa-comment
+            span Continue with Kakao
+        hr
+        div.form__additional
+            span Don't have an account? 
+            a(href="/join") Join

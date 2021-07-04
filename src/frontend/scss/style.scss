@@ -1,15 +1,23 @@
 // Config
 @import "./config/variables";
 @import "./config/reset";
+@import "./config/normalize";
 
 // Components
 @import "./components/header.scss";
+@import "./components/video.scss";
+@import "./components/form.scss";
+@import "./components/flashMessage.scss";
 
 // Screens
+@import "./screens/home.scss";
+@import "./screens/login.scss";
+@import "./screens/edit-profile.scss";
+@import "./screens/upload.scss";
 @import "./screens/watch.scss";
 
 // Defaults
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 a {
   color: inherit;
@@ -19,9 +27,8 @@ a {
 body {
   background-color: $bg;
   color: $white;
-  height: 200vh;
   font-family: "Roboto", sans-serif;
   main {
-    padding-top: 60px;
+    padding: 100px 100px 40px 100px;
   }
 }

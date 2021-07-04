@@ -1,9 +1,13 @@
 extends ../base
 
 block content
-    h4 Update Video
     form(method="POST")
-        input(name="title", placeholder="Title", value=video.title, required)
-        input(name="description", placeholder="Description", value=video.description, minlength=20, required)
-        input(name="hashtags", placeholder="Hashtags, separated by comma", value=video.hashtags.join(), required)
+        label(for="ev-title") Title
+        input(name="title", placeholder="Title", id="ev-title", value=video.title, required)
+        label(for="ev-desc") Description
+        input(name="description", placeholder="Description", id="ev-desc", value=video.description, minlength=20, required)
+        label(for="ev-hashtags")
+            span Hashtags 
+            span.upload__smalltext (separated by comma)
+        input(name="hashtags", placeholder="Hashtags", id="ev-hashtags", value=video.hashtags.join(), required)
         input(value="Save", type='submit')

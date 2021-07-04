@@ -1,0 +1,24 @@
+@keyframes remove {
+  from {
+    margin: 30px;
+    height: auto;
+  }
+  to {
+    margin: 0;
+    height: 0;
+  }
+}
+.message {
+  &.success {
+    color: $kakao;
+  }
+  &.error {
+    color: red;
+  }
+  margin: 30px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  animation: remove 1s ease-in-out 1.5s forwards;
+  display: block;
+}
