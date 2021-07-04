@@ -3,7 +3,7 @@ include ../mixins/avatar
 
 block content
     div#videoContainer
-        video(src=`/${video.fileUrl}`, data-id=video._id, width="1024", height="576")
+        video(src=`/${video.fileUrl}`, data-id=video._id)
         div#blackBackground
         div#videoControls
             div.timelineContainer 
@@ -21,7 +21,8 @@ block content
                 i.fas.fa-expand
 
     div.watch__meta
-        span=`${video.meta.views} views • ${video.createdAt.getFullYear()}.${video.createdAt.getMonth() + 1}.${video.createdAt.getDate()}`
+        span.watch__meta__title=video.title
+        span.watch__meta__subtitle=`${video.meta.views} views • ${video.createdAt.getFullYear()}.${video.createdAt.getMonth() + 1}.${video.createdAt.getDate()}`
     div.watch__uploader
         a(href=`/users/${video.owner._id}`)
             +avatar(video.owner)

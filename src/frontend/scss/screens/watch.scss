@@ -9,7 +9,7 @@
     color: $white;
   }
   video {
-    object-fit: fill;
+    width: 100%;
   }
   #blackBackground {
     position: absolute;
@@ -133,9 +133,17 @@
 
 .watch__meta {
   width: 1024px;
-  opacity: 0.8;
   margin: 20px auto;
-  font-size: 15px;
+  .watch__meta__title {
+    opacity: 1;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .watch__meta__subtitle {
+    opacity: 0.8;
+    font-size: 15px;
+  }
 }
 
 .watch__uploader {
