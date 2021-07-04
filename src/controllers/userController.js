@@ -92,7 +92,6 @@ export const postEdit = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
-  req.flash("success", "Logout success");
   return res.redirect("/");
 };
 

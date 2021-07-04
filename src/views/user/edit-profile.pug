@@ -5,7 +5,7 @@ block content
         if loggedInUser.socialOnly
             img(src=loggedInUser.avatarUrl, width="100", height="100")
         else 
-            img(src=`/${loggedInUser.avatarUrl}`, width="100", height="100")
+            img(src=`${loggedInUser.avatarUrl}`, width="100", height="100")
     form(method="POST", enctype="multipart/form-data").edit-profile__form
         label(for="edit-avatar") Avatar
         input(name="avatar", type="file", id="edit-avatar", accept=".png, .jpg, .jpeg")
