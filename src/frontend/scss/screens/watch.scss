@@ -135,7 +135,6 @@
   width: 1024px;
   margin: 20px auto;
   .watch__meta__title {
-    opacity: 1;
     font-size: 18px;
     display: block;
     margin-bottom: 5px;
@@ -143,6 +142,11 @@
   .watch__meta__subtitle {
     opacity: 0.8;
     font-size: 15px;
+    display: block;
+    margin-bottom: 15px;
+  }
+  .watch__meta__text {
+    display: block;
   }
 }
 

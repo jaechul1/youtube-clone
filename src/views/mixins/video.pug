@@ -18,40 +18,29 @@ mixin video(video)
                     -   const minute = Math.floor(ms/60000);
                     -   const second = Math.floor(ms/1000);
                     -   if (year > 1) {
-                    -       return `${year} years`
-                    -   }
-                    -   if (year == 1) {
-                    -       return `${year} year`
-                    -   }
-                    -   if (month > 1) {
-                    -       return `${month} months`
-                    -   }
-                    -   if (month == 1) {
-                    -       return `${month} month`
-                    -   }
-                    -   if (day > 1) {
-                    -       return `${day} days`
-                    -   }
-                    -   if (day == 1) {
-                    -       return `${day} day`
-                    -   }
-                    -   if (hour > 1) {
-                    -       return `${hour} hours`
-                    -   }
-                    -   if (hour == 1) {
-                    -       return `${hour} hour`
-                    -   }
-                    -   if (minute > 1) {
-                    -       return `${minute} minutes`
-                    -   }
-                    -   if (minute == 1) {
-                    -       return `${minute} minute`
-                    -   }
-                    -   if (second > 1) {
-                    -       return `${second} seconds`
-                    -   }
-                    -   if (second == 1) {
-                    -       return `${second} second`
+                    -       return `${year} years ago`
+                    -   } else if (year == 1) {
+                    -       return `${year} year ago`
+                    -   } else if (month > 1) {
+                    -       return `${month} months ago`
+                    -   } else if (month == 1) {
+                    -       return `${month} month ago`
+                    -   } else if (day > 1) {
+                    -       return `${day} days ago`
+                    -   } else if (day == 1) {
+                    -       return `${day} day ago`
+                    -   } else if (hour > 1) {
+                    -       return `${hour} hours ago`
+                    -   } else if (hour == 1) {
+                    -       return `${hour} hour ago`
+                    -   } else if (minute > 1) {
+                    -       return `${minute} minutes ago`
+                    -   } else if (minute == 1) {
+                    -       return `${minute} minute ago`
+                    -   } else if (second > 1) {
+                    -       return `${second} seconds ago`
+                    -   } else {
+                    -       return "now" 
                     -   }
                     -}
-                    p=`${video.meta.views} views • ${formatTime(Date.now() - video.createdAt.getTime())} ago`
+                    p=`${video.meta.views} views • ${formatTime(Date.now() - video.createdAt.getTime())}`

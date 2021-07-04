@@ -23,6 +23,7 @@ block content
     div.watch__meta
         span.watch__meta__title=video.title
         span.watch__meta__subtitle=`${video.meta.views} views • ${video.createdAt.getFullYear()}.${video.createdAt.getMonth() + 1}.${video.createdAt.getDate()}`
+        span.watch__meta__text=video.description
     div.watch__uploader
         a(href=`/users/${video.owner._id}`)
             +avatar(video.owner)
